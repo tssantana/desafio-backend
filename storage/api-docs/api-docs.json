@@ -1,0 +1,88 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Desafio Backend | Mobills",
+        "description": "Description of API",
+        "contact": {
+            "email": "tssantana289@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0",
+        "x-logo": {
+            "url": "https://via.placeholder.com/190x90.png?text=L5-Swagger"
+        }
+    },
+    "servers": [
+        {
+            "url": "http://my-default-host.com",
+            "description": "Staging Environment"
+        }
+    ],
+    "paths": {
+        "/company": {
+            "get": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "Retrieve the list of company",
+                "description": "Retrieve the list of company",
+                "operationId": "index",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CompanyResponse"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CompanyResponse": {
+                "title": "Company Response",
+                "description": "Data of company",
+                "properties": {
+                    "id": {
+                        "title": "Identificador",
+                        "description": "Identificador do veículo",
+                        "type": "integer"
+                    },
+                    "created_at": {
+                        "title": "Data da criação",
+                        "description": "Data/Hora da criação do veículo",
+                        "type": "string",
+                        "format": "datetime"
+                    },
+                    "updated_at": {
+                        "title": "Data da atualização",
+                        "description": "Data/Hora de atualização do veículo.",
+                        "type": "string",
+                        "format": "datetime"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Company",
+            "description": "All about your companies."
+        }
+    ]
+}
