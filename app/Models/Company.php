@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -35,7 +36,7 @@ class Company extends Model
         "city",
         "zip",
         "country",
-        "phone"
+        "phone",
     ];
 
     protected $casts = [
@@ -51,7 +52,7 @@ class Company extends Model
         "sector" => 'string',
         "primarySicCode" => 'integer',
         "employees" => 'integer',
-        "tags" => 'string',
+        "tags" => 'array',
         "address" => 'string',
         "address2" => 'string',
         "state" => 'string',

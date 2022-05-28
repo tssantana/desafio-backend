@@ -16,7 +16,7 @@ use Illuminate\Routing\Controller as BaseController;
  *          }
  *      },
  *      title="Desafio Backend | Mobills",
- *      description="Description of API",
+ *      description="Api financeira que retorna os dados das empresas listadas na NASDAQ",
  *      @OA\Contact(
  *          email="tssantana289@gmail.com"
  *      ),

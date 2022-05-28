@@ -16,7 +16,7 @@ class IEXCloudService
         $this->_token = env('IEXCLOUD_TOKEN');
     }
 
-    public function getQuote(string $stock, string $field = null)
+    public function getQuote(string $symbol, string $field = null)
     {
         $path = '/stock/?/quote';
         
@@ -25,22 +25,22 @@ class IEXCloudService
             $path = '/stock/?/quote/?';
         }
 
-        $path = Str::replaceArray('?', [$stock, $field], $path);
+        $path = Str::replaceArray('?', [$symbol, $field], $path);
         
-        $response = Http::acceptJson()->get($this->_uri . $path, [
+        $response = Http::withoutVerifying()->acceptJson()->get($this->_uri . $path, [
             'token' => $this->_token
         ]);
         
         return $response;
     }
 
-    public function getCompany(string $stock)
+    public function getCompany(string $symbol)
     {
         $path = '/stock/?/company';
 
-        $path = Str::replaceArray('?', [$stock], $path);
+        $path = Str::replaceArray('?', [$symbol], $path);
         
-        $response = Http::acceptJson()->get($this->_uri . $path, [
+        $response = Http::withoutVerifying()->acceptJson()->get($this->_uri . $path, [
             'token' => $this->_token
         ]);
         

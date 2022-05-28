@@ -19,4 +19,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('company/{company}/quote/{field?}', [CompanyController::class, 'quote']);
 Route::apiResource('company', CompanyController::class);

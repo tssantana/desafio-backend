@@ -13,7 +13,7 @@ class Cotation extends Model
 
     public $incrementing = false;
 
-    protected $primaryKey = "id";
+    protected $primaryKey = "symbol";
 
     protected $fillable = [
         'symbol',

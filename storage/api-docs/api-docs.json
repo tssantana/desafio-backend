@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "Desafio Backend | Mobills",
-        "description": "Description of API",
+        "description": "Api financeira que retorna os dados das empresas listadas na NASDAQ",
         "contact": {
             "email": "tssantana289@gmail.com"
         },
@@ -27,9 +27,87 @@
                 "tags": [
                     "Company"
                 ],
-                "summary": "Retrieve the list of company",
-                "description": "Retrieve the list of company",
+                "summary": "Recupera todas as companhias cadastradas.",
+                "description": "Recupera uma lista com todas as companhias já cadastradas.",
                 "operationId": "index",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CompanyResponse"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/company/{company}": {
+            "get": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "Recupera a companhia informada.",
+                "description": "Recupera as informações da companhia solicitada.",
+                "operationId": "show",
+                "parameters": [
+                    {
+                        "name": "company",
+                        "in": "path",
+                        "description": "Símbolo da companhia",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CompanyResponse"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/company/{company}/quote": {
+            "get": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "Recupera a cotação atual da empresa.",
+                "description": "Recupera a cotação atual da empresa com atraso de 15 minutos.",
+                "operationId": "quote",
+                "parameters": [
+                    {
+                        "name": "company",
+                        "in": "path",
+                        "description": "Símbolo da companhia",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -55,24 +133,76 @@
         "schemas": {
             "CompanyResponse": {
                 "title": "Company Response",
-                "description": "Data of company",
+                "description": "Dados da companhia.",
                 "properties": {
-                    "id": {
-                        "title": "Identificador",
-                        "description": "Identificador do veículo",
-                        "type": "integer"
+                    "symbol": {
+                        "title": "Symbol",
+                        "description": "Símbolo da empresa na bolsa de valores (ticket).",
+                        "type": "string"
                     },
                     "created_at": {
                         "title": "Data da criação",
-                        "description": "Data/Hora da criação do veículo",
+                        "description": "Data/Hora da criação da companhia nesta base de dados.",
                         "type": "string",
                         "format": "datetime"
                     },
                     "updated_at": {
                         "title": "Data da atualização",
-                        "description": "Data/Hora de atualização do veículo.",
+                        "description": "Data/Hora de atualização dos dados da companhia nesta base de dados.",
                         "type": "string",
                         "format": "datetime"
+                    },
+                    "companyName": {
+                        "title": "companyName",
+                        "description": "Nome da companhia na bolsa de valores.",
+                        "type": "string"
+                    },
+                    "description": {
+                        "title": "description",
+                        "description": "Descrição da companhia na bolsa de valores.",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "CotationResponse": {
+                "title": "Cotation Response",
+                "description": "Dados da cotação da companhia.",
+                "properties": {
+                    "symbol": {
+                        "title": "Symbol",
+                        "description": "Símbolo da empresa na bolsa de valores (ticket).",
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "title": "Data da criação",
+                        "description": "Data/Hora da criação da cotação nesta base de dados.",
+                        "type": "string",
+                        "format": "datetime"
+                    },
+                    "updated_at": {
+                        "title": "Data da atualização",
+                        "description": "Data/Hora de atualização dos dados da cotação nesta base de dados.",
+                        "type": "string",
+                        "format": "datetime"
+                    },
+                    "latestPrice": {
+                        "title": "latestPrice",
+                        "description": "O valor mais recente da companhia.",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "change": {
+                        "title": "change",
+                        "description": "A variação de preço entre o valor mais recente e o fechamento anterior.",
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "changePercent": {
+                        "title": "description",
+                        "description": "O percentual da variação de preço entre o valor mais recente e o fechamento anterior.",
+                        "type": "number",
+                        "format": "float"
                     }
                 },
                 "type": "object"
@@ -82,7 +212,7 @@
     "tags": [
         {
             "name": "Company",
-            "description": "All about your companies."
+            "description": "Tudo sobre as suas empresas."
         }
     ]
 }

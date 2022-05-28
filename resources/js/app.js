@@ -1,4 +1,5 @@
 require('./bootstrap');
+require('./RestService');
 
 import Alpine from 'alpinejs';
 
