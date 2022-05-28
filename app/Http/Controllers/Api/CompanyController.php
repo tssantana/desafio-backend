@@ -8,7 +8,6 @@ use App\Http\Resources\CompanyResource;
 use App\Http\Services\IEXCloudService;
 use App\Models\Company;
 use App\Models\Cotation;
-use Illuminate\Support\Facades\Log;
 
 /**
  * @OA\Tag(
@@ -208,8 +207,6 @@ class CompanyController extends Controller
 
             if ($response->ok()) {
                 $data = $response->json();
-
-                Log::info($data);
 
                 $model = new Cotation($data);
 

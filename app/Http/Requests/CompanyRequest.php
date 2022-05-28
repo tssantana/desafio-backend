@@ -24,7 +24,10 @@ class CompanyRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'symbol' => [
+                'required',
+                'string'
+            ]
         ];
     }
 }
