@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -136,5 +137,10 @@ class Cotation extends Model
     public function company()
     {
         return $this->belongsTo(Company::class, 'symbol', 'symbol');
+    }
+
+    public function getLatestUpdateAttribute($value)
+    {
+        return Carbon::createFromTimestampMsUTC($value);
     }
 }

@@ -11,6 +11,10 @@
                 <span>{{$cotation->currency}} {{$cotation->latestPrice}}</span>
             </p>
             <p>
+                <strong>Latest Update:</strong>
+                <span>{{$cotation->latestUpdate->format('d/m/Y H:i:s')}}</span>
+            </p>
+            <p>
                 <strong>Variação:</strong>
                 <span>{{$cotation->currency}} {{$cotation->change}} ({{$cotation->changePercent * 100}}%)</span>
             </p>
